@@ -9,17 +9,24 @@ import { Type } from './shared/components/modal-time/modal-time.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  // INJECT SERVICE
   private service = inject(OlapService)
-  headers: string[] = []
+
   data: Data[] = []
 
+  // NAMPUNG DATA CONFIDENCE SEMENTARA
   dataConfidence: any[] = []
+
+  // NAMPUNG DATA SATELITE SEMENTARA
   dataSatelite: any[] = []
+
+  //INSIAL
 
   ngOnInit(): void {
     this.getDataLocation("location")
   }
+
+  //DRILL DOWN
 
   getChild(indexes: number[], query: QueryData, tipe: Type) {
     console.log(query);
@@ -81,6 +88,8 @@ export class AppComponent implements OnInit {
     })
   }
 
+  // GET DATA SATELITE YANG TERSEDIA
+
   getSatelite(query: QueryData, tipe: Type) {
     var q = { ...query }
     q.dimension = "satelite"
@@ -115,6 +124,8 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  // GET DATA CONFIDENCE YANG TERSEDIA
 
   getConfidence(query: QueryData, tipe: Type) {
     var q = { ...query }
@@ -152,6 +163,8 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  // SETELAH PILIH SETELITE ATAU CONFIDENCE
 
   getData(indexes: number[], query?: QueryData, select?: string, queue?: QueryData, tipe?: Type) {
     if (query != undefined) {
@@ -254,6 +267,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+  // PILIH SATELIT
+
   onSatelite(indexes: number[], query: QueryData, event: any, tipe: Type) {
     let param = { ...query }
     param.satelite = event.value;
@@ -275,9 +290,10 @@ export class AppComponent implements OnInit {
     this.dataSatelite = []
   }
 
+  // PILIH CONFIDENCE
+
   onConfidence(indexes: number[], query: QueryData, event: any, tipe: Type) {
     // console.log(query);
-
     let param = { ...query }
     param.confidence = event.value;
     switch (tipe) {
@@ -297,6 +313,8 @@ export class AppComponent implements OnInit {
     this.getData(indexes, param, query[tipe!], query, tipe)
     this.dataConfidence = []
   }
+
+  //SUBMIT WAKTU
 
   onFilter(indexes: number[], query?: QueryData, tipe?: Type) {
     let param = { ...query }
@@ -376,6 +394,8 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
+  //INISIAL
 
   getDataLocation(target: string) {
     this.service.query(target).subscribe({

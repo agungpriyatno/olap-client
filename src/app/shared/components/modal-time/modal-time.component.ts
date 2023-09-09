@@ -66,6 +66,8 @@ export class ModalTimeComponent implements OnInit {
   dataBulan: any[] = []
   dataHari: any[] = []
 
+  //FROM GRUOP
+
   form = this.fb.group({
     tahun: [""],
     semester: [""],
@@ -73,6 +75,8 @@ export class ModalTimeComponent implements OnInit {
     bulan: [""],
     hari: [""],
   })
+
+  // FORM
 
   get tahun() {
     return this.form.get("tahun")
@@ -94,6 +98,7 @@ export class ModalTimeComponent implements OnInit {
     return this.form.get("hari")
   }
 
+  // BATAL
   back() {
     this.onSelect.emit({
       index: this.index,
@@ -103,7 +108,7 @@ export class ModalTimeComponent implements OnInit {
   }
 
 
-
+// GET DATA WAKTU
   getData(type: Time) {
     let data = { ...this.params }
     console.log(data);
@@ -185,6 +190,9 @@ export class ModalTimeComponent implements OnInit {
       }
     })
   }
+
+  // SAAT MEMILIH WAKTU
+  // PROSES PENGISIAN FORM
 
   onSelectData(type: Time, data: string | number): void {
     switch (type) {
