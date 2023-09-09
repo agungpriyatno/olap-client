@@ -1,0 +1,66 @@
+<div class="absolute left-0 top-0 h-screen w-screen bg-black/10">
+    <div class="flex flex-col justify-center place-items-center h-screen">
+        <div class="bg-white rounded p-5">
+            <form class="flex flex-col gap-3" [formGroup]="form">
+                <div class="flex flex-col relative">
+                    <input formControlName="tahun" (click)="getData('tahun'); selectTahun = !selectTahun" type="text" readonly name="" id="" class="px-3 py-2 focus:outline-none focus:border-none bg-zinc-100 rounded" placeholder="Tahun">
+                    <ul class="absolute bg-zinc-50 rounded shadow left-0 py-2 top-[100%] w-full z-50" *ngIf="selectTahun">
+                        <ng-container *ngFor="let item of dataTahun">
+                            <li class="w-full px-3 py-2 hover:bg-blue-200" (click)="onSelectData('tahun', item[0])">
+                                <span>{{item[0]}}</span>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="flex flex-col relative" *ngIf="tahun?.value != ''">
+                    <input formControlName="semester" (click)="getData('semester'); selectSemester = !selectSemester" type="text" readonly name="" id="" class="px-3 py-2 focus:outline-none focus:border-none bg-zinc-100 rounded" placeholder="Semester">
+                    <ul class="absolute bg-zinc-50 rounded shadow left-0 py-2 top-[100%] w-full z-50" *ngIf="selectSemester">
+                        <ng-container *ngFor="let item of dataSemester">
+                            <li class="w-full px-3 py-2 hover:bg-blue-200" (click)="onSelectData('semester', item[0])">
+                                <span>{{item[0]}}</span>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="flex flex-col relative" *ngIf="semester?.value != ''">
+                    <input formControlName="quartal" (click)="getData('quartal'); selectQuartal = !selectQuartal" type="text" readonly name="" id="" class="px-3 py-2 focus:outline-none focus:border-none bg-zinc-100 rounded" placeholder="Quartal">
+                    <ul class="absolute bg-zinc-50 rounded shadow left-0 py-2 top-[100%] w-full z-50" *ngIf="selectQuartal">
+                        <ng-container *ngFor="let item of dataQuartal">
+                            <li class="w-full px-3 py-2 hover:bg-blue-200" (click)="onSelectData('quartal', item[0])">
+                                <span>{{item[0]}}</span>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="flex flex-col relative" *ngIf="quartal?.value != ''">
+                    <input formControlName="bulan" (click)="getData('bulan'); selectBulan = !selectBulan" type="text" readonly name="" id="" class="px-3 py-2 focus:outline-none focus:border-none bg-zinc-100 rounded" placeholder="Bulan">
+                    <ul class="absolute bg-zinc-50 rounded shadow left-0 py-2 top-[100%] w-full z-50" *ngIf="selectBulan">
+                        <ng-container *ngFor="let item of dataBulan">
+                            <li class="w-full px-3 py-2 hover:bg-blue-200" (click)="onSelectData('bulan', item[0])">
+                                <span>{{item[0]}}</span>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="flex flex-col relative" *ngIf="bulan?.value != ''">
+                    <input formControlName="hari" (click)="getData('hari'); selectHari = !selectHari" type="text" readonly name="" id="" class="px-3 py-2 focus:outline-none focus:border-none bg-zinc-100 rounded" placeholder="Hari">
+                    <ul class="absolute bg-zinc-50 rounded shadow left-0 py-2 top-[100%] w-full z-50" *ngIf="selectHari">
+                        <ng-container *ngFor="let item of dataHari">
+                            <li class="w-full px-3 py-2 hover:bg-blue-200" (click)="onSelectData('hari', item[0])">
+                                <span>{{item[0]}}</span>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="flex flex-row w-full gap-3">
+                    <button class="px-3 py-2 rounded bg-red-500 text-white flex-1" (click)="back()">
+                        <span>Cancel</span>
+                    </button>
+                    <button class="px-3 py-2 rounded bg-blue-500 text-white flex-1" (click)="onSubmit()">
+                        <span>Submit</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
