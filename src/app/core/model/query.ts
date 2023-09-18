@@ -15,3 +15,8 @@ export interface QueryData {
     satelite?: string,
 }
 
+export interface IChart {
+    labels: string[]
+    values: number[]
+}
+

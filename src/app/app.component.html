@@ -6,29 +6,33 @@
           <span class="font-bold px-3 py-2">Location</span>
         </div>
       </div>
-      
+
       <div class="pl-5 flex flex-col gap-2">
         <ng-container *ngFor="let item of data; let i = index">
           <div class="flex flex-col gap-2">
-            <div class="bg-white rounded px-3 py-2 shadow w-full" >
+            <div class="bg-white rounded px-3 py-2 shadow w-full">
               <div class="flex flex-row gap-2 place-items-center h-full">
-                <span class="font-bold px-3 py-2 flex-1" (click)="getChild([i], item.query, 'provinsi')">{{item.data}} <i class="fa-solid fa-plus"></i></span>
-                <span class="px-3 py-2 flex-1" >
-                  <button class="px-3 py-2 bg-blue-500 text-white rounded" (click)="item.modal = !item.modal">Time</button>
+                <span class="font-bold px-3 py-2 flex-1" (click)="getChild([i], item.query, 'provinsi')">{{item.data}}
+                  <i class="fa-solid fa-plus"></i></span>
+                <span class="px-3 py-2 flex-1">
+                  <button class="px-3 py-2 bg-blue-500 text-white rounded"
+                    (click)="item.modal = !item.modal">Time</button>
                 </span>
                 <span class="px-3 py-2 flex-1">
-                  <select name="" id="" class="px-3 py-2 rounded" (click)="getConfidence(item.query, 'pulau')" (change)="onConfidence([i], item.query, $event.target, 'pulau')">
+                  <select name="" id="" class="px-3 py-2 rounded" (click)="getConfidence(item.query, 'pulau')"
+                    (change)="onConfidence([i], item.query, $event.target, 'pulau')">
                     <option value="">{{item.query.confidence ?? "Confidence"}}</option>
                     <ng-container *ngFor="let select of dataConfidence">
-                      <option [value]="select[0]" >{{select[0]}}</option>
+                      <option [value]="select[0]">{{select[0]}}</option>
                     </ng-container>
                   </select>
                 </span>
                 <span class="px-3 py-2 flex-1">
-                  <select name="" id="" class="px-3 py-2 rounded" (click)="getSatelite(item.query, 'pulau')" (change)="onSatelite([i], item.query, $event.target, 'pulau')">
+                  <select name="" id="" class="px-3 py-2 rounded" (click)="getSatelite(item.query, 'pulau')"
+                    (change)="onSatelite([i], item.query, $event.target, 'pulau')">
                     <option value="">{{item.query.satelite ?? "Satelite"}}</option>
                     <ng-container *ngFor="let select of dataSatelite">
-                      <option [value]="select[0]" >{{select[0]}}</option>
+                      <option [value]="select[0]">{{select[0]}}</option>
                     </ng-container>
                   </select>
                 </span>
@@ -39,25 +43,32 @@
             <div class="pl-5 flex flex-col gap-2">
               <ng-container *ngFor="let provinsi of item.child; let j = index">
                 <div class="flex flex-col gap-2">
-                  <div class="bg-white rounded px-3 py-2 shadow w-full" >
+                  <div class="bg-white rounded px-3 py-2 shadow w-full">
                     <div class="flex flex-row gap-2 place-items-center h-full">
-                      <span class="font-bold px-3 py-2 flex-1" (click)="provinsi.query.provinsi = provinsi.data.toString();getChild([i, j], provinsi.query, 'kota')">{{provinsi.data}}  <i class="fa-solid fa-plus"></i></span>
-                      <span class="px-3 py-2 flex-1" >
-                        <button class="px-3 py-2 bg-blue-500 text-white rounded" (click)="provinsi.modal = !provinsi.modal">Time</button>
+                      <span class="font-bold px-3 py-2 flex-1"
+                        (click)="provinsi.query.provinsi = provinsi.data.toString();getChild([i, j], provinsi.query, 'kota')">{{provinsi.data}}
+                        <i class="fa-solid fa-plus"></i></span>
+                      <span class="px-3 py-2 flex-1">
+                        <button class="px-3 py-2 bg-blue-500 text-white rounded"
+                          (click)="provinsi.modal = !provinsi.modal">Time</button>
                       </span>
                       <span class="px-3 py-2 flex-1">
-                        <select  [disabled]="provinsi.query.confidence" name="" id="" class="px-3 py-2 rounded" (click)="getConfidence(provinsi.query, 'provinsi')" (change)="onConfidence([i, j], provinsi.query, $event.target, 'provinsi')">
+                        <select [disabled]="provinsi.query.confidence" name="" id="" class="px-3 py-2 rounded"
+                          (click)="getConfidence(provinsi.query, 'provinsi')"
+                          (change)="onConfidence([i, j], provinsi.query, $event.target, 'provinsi')">
                           <option value="">{{provinsi.query.confidence ?? "Confidence"}}</option>
                           <ng-container *ngFor="let select of dataConfidence">
-                            <option [value]="select[0]" >{{select[0]}}</option>
+                            <option [value]="select[0]">{{select[0]}}</option>
                           </ng-container>
                         </select>
                       </span>
                       <span class="px-3 py-2 flex-1">
-                        <select [disabled]="provinsi.query.satelite" name="" id="" class="px-3 py-2 rounded" (click)="getSatelite(provinsi.query, 'provinsi')" (change)="onSatelite([i, j], provinsi.query, $event.target, 'provinsi')">
+                        <select [disabled]="provinsi.query.satelite" name="" id="" class="px-3 py-2 rounded"
+                          (click)="getSatelite(provinsi.query, 'provinsi')"
+                          (change)="onSatelite([i, j], provinsi.query, $event.target, 'provinsi')">
                           <option value="">{{provinsi.query.satelite ?? "Satelite"}}</option>
                           <ng-container *ngFor="let select of dataSatelite">
-                            <option [value]="select[0]" >{{select[0]}}</option>
+                            <option [value]="select[0]">{{select[0]}}</option>
                           </ng-container>
                         </select>
                       </span>
@@ -69,111 +80,143 @@
                 <div class="pl-5 flex flex-col gap-2">
                   <ng-container *ngFor="let kota of provinsi.child; let k = index">
                     <div class="flex flex-col gap-2">
-                      <div class="bg-white rounded px-3 py-2 shadow w-full" >
+                      <div class="bg-white rounded px-3 py-2 shadow w-full">
                         <div class="flex flex-row gap-2 place-items-center h-full">
-                          <span class="font-bold px-3 py-2 flex-1"  (click)="kota.query.kota = kota.data.toString();getChild([i, j, k], kota.query, 'kecamatan')">{{kota.data}} <i class="fa-solid fa-plus"></i></span>
-                          <span class="px-3 py-2 flex-1" >
-                            <button class="px-3 py-2 bg-blue-500 text-white rounded" (click)="kota.modal = !kota.modal">Time</button>
+                          <span class="font-bold px-3 py-2 flex-1"
+                            (click)="kota.query.kota = kota.data.toString();getChild([i, j, k], kota.query, 'kecamatan')">{{kota.data}}
+                            <i class="fa-solid fa-plus"></i></span>
+                          <span class="px-3 py-2 flex-1">
+                            <button class="px-3 py-2 bg-blue-500 text-white rounded"
+                              (click)="kota.modal = !kota.modal">Time</button>
                           </span>
                           <span class="px-3 py-2 flex-1">
-                            <select  [disabled]="kota.query.confidence" name="" id="" class="px-3 py-2 rounded" (click)="getConfidence(kota.query, 'kota')" (change)="onConfidence([i, j, k], kota.query, $event.target, 'kota')">
+                            <select [disabled]="kota.query.confidence" name="" id="" class="px-3 py-2 rounded"
+                              (click)="getConfidence(kota.query, 'kota')"
+                              (change)="onConfidence([i, j, k], kota.query, $event.target, 'kota')">
                               <option value="">{{kota.query.confidence ?? "Confidence"}}</option>
                               <ng-container *ngFor="let select of dataConfidence">
-                                <option [value]="select[0]" >{{select[0]}}</option>
+                                <option [value]="select[0]">{{select[0]}}</option>
                               </ng-container>
                             </select>
                           </span>
                           <span class="px-3 py-2 flex-1">
-                            <select  [disabled]="kota.query.satelite" name="" id="" class="px-3 py-2 rounded" (click)="getSatelite(kota.query, 'kota')" (change)="onSatelite([i, j, k], kota.query, $event.target, 'kota')">
+                            <select [disabled]="kota.query.satelite" name="" id="" class="px-3 py-2 rounded"
+                              (click)="getSatelite(kota.query, 'kota')"
+                              (change)="onSatelite([i, j, k], kota.query, $event.target, 'kota')">
                               <option value="">{{kota.query.satelite ?? "Satelite"}}</option>
                               <ng-container *ngFor="let select of dataSatelite">
-                                <option [value]="select[0]" >{{select[0]}}</option>
+                                <option [value]="select[0]">{{select[0]}}</option>
                               </ng-container>
                             </select>
                           </span>
                           <span class="px-3 py-2 flex-1">{{kota.total}}</span>
                         </div>
-                      </div> 
+                      </div>
                     </div>
 
                     <div class="pl-5 flex flex-col gap-2">
                       <ng-container *ngFor="let kecamatan of kota.child; let l = index">
                         <div class="flex flex-col gap-2">
-                          <div class="bg-white rounded px-3 py-2 shadow w-full" >
+                          <div class="bg-white rounded px-3 py-2 shadow w-full">
                             <div class="flex flex-row gap-2 place-items-center h-full">
-                              <span class="font-bold px-3 py-2 flex-1" (click)="kecamatan.query.kecamatan = kecamatan.data.toString();getChild([i, j, k, l], kecamatan.query, 'desa')">{{kecamatan.data}} <i class="fa-solid fa-plus"></i></span>
-                              <span class="px-3 py-2 flex-1" >
-                                <button class="px-3 py-2 bg-blue-500 text-white rounded" (click)="kecamatan.modal = !kecamatan.modal">Time</button>
+                              <span class="font-bold px-3 py-2 flex-1"
+                                (click)="kecamatan.query.kecamatan = kecamatan.data.toString();getChild([i, j, k, l], kecamatan.query, 'desa')">{{kecamatan.data}}
+                                <i class="fa-solid fa-plus"></i></span>
+                              <span class="px-3 py-2 flex-1">
+                                <button class="px-3 py-2 bg-blue-500 text-white rounded"
+                                  (click)="kecamatan.modal = !kecamatan.modal">Time</button>
                               </span>
                               <span class="px-3 py-2 flex-1">
-                                <select  [disabled]="kecamatan.query.confidence" name="" id="" class="px-3 py-2 rounded" (click)="getConfidence(kecamatan.query, 'kecamatan')" (change)="onConfidence([i, j, k, l], kecamatan.query, $event.target, 'kecamatan')">
+                                <select [disabled]="kecamatan.query.confidence" name="" id="" class="px-3 py-2 rounded"
+                                  (click)="getConfidence(kecamatan.query, 'kecamatan')"
+                                  (change)="onConfidence([i, j, k, l], kecamatan.query, $event.target, 'kecamatan')">
                                   <option value="">{{kecamatan.query.confidence ?? "Confidence"}}</option>
                                   <ng-container *ngFor="let select of dataConfidence">
-                                    <option [value]="select[0]" >{{select[0]}}</option>
+                                    <option [value]="select[0]">{{select[0]}}</option>
                                   </ng-container>
                                 </select>
                               </span>
                               <span class="px-3 py-2 flex-1">
-                                <select  [disabled]="kecamatan.query.satelite" name="" id="" class="px-3 py-2 rounded" (click)="getSatelite(kecamatan.query, 'kecamatan')" (change)="onSatelite([i, j, k, l], kecamatan.query, $event.target, 'kecamatan')">
+                                <select [disabled]="kecamatan.query.satelite" name="" id="" class="px-3 py-2 rounded"
+                                  (click)="getSatelite(kecamatan.query, 'kecamatan')"
+                                  (change)="onSatelite([i, j, k, l], kecamatan.query, $event.target, 'kecamatan')">
                                   <option value="">{{kecamatan.query.satelite ?? "Satelite"}}</option>
                                   <ng-container *ngFor="let select of dataSatelite">
-                                    <option [value]="select[0]" >{{select[0]}}</option>
+                                    <option [value]="select[0]">{{select[0]}}</option>
                                   </ng-container>
                                 </select>
                               </span>
                               <span class="px-3 py-2 flex-1">{{kecamatan.total}}</span>
                             </div>
-                          </div> 
+                          </div>
                         </div>
 
                         <div class="pl-5 flex flex-col gap-2">
                           <ng-container *ngFor="let desa of kecamatan.child; let m = index">
                             <div class="flex flex-col gap-2">
-                              <div class="bg-white rounded px-3 py-2 shadow w-full" >
+                              <div class="bg-white rounded px-3 py-2 shadow w-full">
                                 <div class="flex flex-row gap-2 place-items-center h-full">
                                   <span class="font-bold px-3 py-2 flex-1">{{desa.data}}</span>
-                                  <span class="px-3 py-2 flex-1" >
-                                    <button class="px-3 py-2 bg-blue-500 text-white rounded" (click)="desa.modal = !desa.modal">Time</button>
+                                  <span class="px-3 py-2 flex-1">
+                                    <button class="px-3 py-2 bg-blue-500 text-white rounded"
+                                      (click)="desa.modal = !desa.modal">Time</button>
                                   </span>
                                   <span class="px-3 py-2 flex-1">
-                                    <select  [disabled]="desa.query.confidence" name="" id="" class="px-3 py-2 rounded" (click)="getConfidence(desa.query, 'desa')" (change)="onConfidence([i, j, k, l, m], desa.query, $event.target, 'desa')">
+                                    <select [disabled]="desa.query.confidence" name="" id="" class="px-3 py-2 rounded"
+                                      (click)="getConfidence(desa.query, 'desa')"
+                                      (change)="onConfidence([i, j, k, l, m], desa.query, $event.target, 'desa')">
                                       <option value="">{{desa.query.confidence ?? "Confidence"}}</option>
                                       <ng-container *ngFor="let select of dataConfidence">
-                                        <option [value]="select[0]" >{{select[0]}}</option>
+                                        <option [value]="select[0]">{{select[0]}}</option>
                                       </ng-container>
                                     </select>
                                   </span>
                                   <span class="px-3 py-2 flex-1">
-                                    <select  [disabled]="desa.query.satelite" name="" id="" class="px-3 py-2 rounded" (click)="getSatelite(desa.query, 'desa')" (change)="onSatelite([i, j, k, l, m], desa.query, $event.target, 'desa')">
+                                    <select [disabled]="desa.query.satelite" name="" id="" class="px-3 py-2 rounded"
+                                      (click)="getSatelite(desa.query, 'desa')"
+                                      (change)="onSatelite([i, j, k, l, m], desa.query, $event.target, 'desa')">
                                       <option value="">{{desa.query.satelite ?? "Satelite"}}</option>
                                       <ng-container *ngFor="let select of dataSatelite">
-                                        <option [value]="select[0]" >{{select[0]}}</option>
+                                        <option [value]="select[0]">{{select[0]}}</option>
                                       </ng-container>
                                     </select>
                                   </span>
                                   <span class="px-3 py-2 flex-1">{{desa.total}}</span>
                                 </div>
-                              </div> 
+                              </div>
                             </div>
-                            <app-modal-time *ngIf="desa.modal" [index]="m" [value]="desa.data.toString()" [query]="desa.query" (onSelect)="onFilter([i, j, k, l, m], $event.data, 'desa')" [tipe]="'desa'"></app-modal-time>
+                            <app-modal-time *ngIf="desa.modal" [index]="m" [value]="desa.data.toString()"
+                              [query]="desa.query" (onSelect)="onFilter([i, j, k, l, m], $event.data, 'desa')"
+                              [tipe]="'desa'"></app-modal-time>
                           </ng-container>
                         </div>
 
-                        <app-modal-time *ngIf="kecamatan.modal" [index]="l" [value]="kecamatan.data.toString()" [query]="kecamatan.query" (onSelect)="onFilter([i, j, k, l], $event.data, 'kecamatan')" [tipe]="'kecamatan'"></app-modal-time>
+                        <app-modal-time *ngIf="kecamatan.modal" [index]="l" [value]="kecamatan.data.toString()"
+                          [query]="kecamatan.query" (onSelect)="onFilter([i, j, k, l], $event.data, 'kecamatan')"
+                          [tipe]="'kecamatan'"></app-modal-time>
                       </ng-container>
                     </div>
 
-                    <app-modal-time *ngIf="kota.modal" [index]="k" [value]="kota.data.toString()" [query]="kota.query" (onSelect)="onFilter([i, j, k], $event.data, 'kota')" [tipe]="'kota'"></app-modal-time>
+                    <app-modal-time *ngIf="kota.modal" [index]="k" [value]="kota.data.toString()" [query]="kota.query"
+                      (onSelect)="onFilter([i, j, k], $event.data, 'kota')" [tipe]="'kota'"></app-modal-time>
                   </ng-container>
                 </div>
 
-                <app-modal-time *ngIf="provinsi.modal" [index]="j" [value]="provinsi.data.toString()" [query]="provinsi.query" (onSelect)="onFilter([i, j], $event.data, 'provinsi')" [tipe]="'provinsi'"></app-modal-time>
+                <app-modal-time *ngIf="provinsi.modal" [index]="j" [value]="provinsi.data.toString()"
+                  [query]="provinsi.query" (onSelect)="onFilter([i, j], $event.data, 'provinsi')"
+                  [tipe]="'provinsi'"></app-modal-time>
               </ng-container>
             </div>
 
           </div>
-          <app-modal-time *ngIf="item.modal" [index]="i" [value]="item.data.toString()" [query]="item.query" (onSelect)="onFilter([i], $event.data, 'pulau')" [tipe]="'pulau'"></app-modal-time>
+          <app-modal-time *ngIf="item.modal" [index]="i" [value]="item.data.toString()" [query]="item.query"
+            (onSelect)="onFilter([i], $event.data, 'pulau')" [tipe]="'pulau'"></app-modal-time>
         </ng-container>
+
+        <div class="bg-white shadow rounded p-3">
+          <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
+          </canvas>
+        </div>
       </div>
 
     </div>

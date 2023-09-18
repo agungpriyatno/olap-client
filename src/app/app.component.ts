@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { QueryData } from './core/model/query';
+import { IChart, QueryData } from './core/model/query';
 import { OlapService } from './core/services/olap.service';
 import { Type } from './shared/components/modal-time/modal-time.component';
+import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,8 @@ export class AppComponent implements OnInit {
   // NAMPUNG DATA SATELITE SEMENTARA
   dataSatelite: any[] = []
 
+
+
   //INSIAL
 
   ngOnInit(): void {
@@ -33,9 +37,15 @@ export class AppComponent implements OnInit {
 
     this.service.query("location", query).subscribe({
       next: (res) => {
+        var chart: IChart = {
+          labels: [],
+          values: [],
+        }
         let hasil: Data[] = []
         res.forEach((d) => {
           let param = { ...query }
+          chart.labels.push(d[0])
+          chart.values.push(d[1])
 
           switch (tipe) {
             case "provinsi":
@@ -64,6 +74,7 @@ export class AppComponent implements OnInit {
 
 
         })
+        this.setChart(chart)
         switch (indexes.length) {
           case 1:
             this.data[indexes[0]].child = hasil
@@ -171,19 +182,17 @@ export class AppComponent implements OnInit {
       console.log(query);
       this.service.query("location", query).subscribe({
         next: (res) => {
+          var chart: IChart = {
+            labels: [],
+            values: [],
+          }
+
           res.forEach((d) => {
             // console.log(d);
-
-
+            
             if (d[0].toString() === select) {
-              // query.pulau = d[0],
-              //   this.data[index] = {
-              //     data: d[0],
-              //     total: d[1],
-              //     modal: false,
-              //     query: query,
-              //     child: []
-              //   }
+              chart.labels.push(d[0])
+              chart.values.push(d[1])
 
               let param = { ...query }
               switch (tipe) {
@@ -241,6 +250,8 @@ export class AppComponent implements OnInit {
             }
 
           })
+        this.setChart(chart)
+
         },
         error: (err) => {
           console.log(err);
@@ -340,7 +351,13 @@ export class AppComponent implements OnInit {
 
       this.service.query("location", param).subscribe({
         next: (res) => {
+          var chart: IChart = {
+            labels: [],
+            values: [],
+          }
           res.forEach((d) => {
+            chart.labels.push(d[0])
+            chart.values.push(d[1])
             if (d[0].toString() === query[tipe!]?.toString()) {
               let param = { ...query }
               let hasil: Data = {
@@ -369,6 +386,7 @@ export class AppComponent implements OnInit {
               }
             }
           })
+          this.setChart(chart)
         },
         error: (err) => {
           console.log(err);
@@ -400,7 +418,13 @@ export class AppComponent implements OnInit {
   getDataLocation(target: string) {
     this.service.query(target).subscribe({
       next: (res) => {
+        var chart: IChart = {
+          labels: [],
+          values: [],
+        }
         res.forEach((d) => {
+          chart.labels.push(d[0])
+          chart.values.push(d[1])
           this.data.push({
             data: d[0],
             total: d[1],
@@ -412,12 +436,43 @@ export class AppComponent implements OnInit {
           })
         })
 
+        this.setChart(chart)
+
       },
       error: (err) => {
         console.log(err);
       }
     })
   }
+
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 0,
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+    },
+  };
+  public barChartType: ChartType = 'bar';
+
+  public barChartData?: ChartData<'bar'>
+
+  setChart(data: IChart) {
+    this.barChartData = {
+      labels: data.labels,
+      datasets: [
+        { data: data.values, label: 'Lokasi' },
+      ],
+    }
+  }
+
 
 }
 
