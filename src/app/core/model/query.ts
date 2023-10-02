@@ -1,4 +1,6 @@
 export interface QueryData {
+    limit?: number,
+    offset?: number,
     point?: string,
     dimension?: string,
     pulau?: string,

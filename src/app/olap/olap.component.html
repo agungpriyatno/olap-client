@@ -6,7 +6,6 @@
             <span class="font-bold px-3 py-2">Location</span>
           </div>
         </div>
-  
         <div class="pl-5 flex flex-col gap-2">
           <ng-container *ngFor="let item of data; let i = index">
             <div class="flex flex-col gap-2">
@@ -212,12 +211,17 @@
             <app-modal-time *ngIf="item.modal" [index]="i" [value]="item.data.toString()" [query]="item.query"
               (onSelect)="onFilter([i], $event.data, 'pulau')" [tipe]="'pulau'"></app-modal-time>
           </ng-container>
-  
+          
+        </div>
+        <div class="bg-white rounded px-3 py-2 shadow w-full">
+            <div class="flex flex-row gap-2 justify-end">
+              <span class="font-bold px-3 py-2 hover:text-blue-500 cursor-pointer" (click)="loadMore()">Load more</span>
+            </div>
+          </div>
           <div class="bg-white shadow rounded p-3">
             <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
             </canvas>
           </div>
-        </div>
   
       </div>
     </div>

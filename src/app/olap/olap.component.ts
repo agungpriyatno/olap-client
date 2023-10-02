@@ -15,7 +15,8 @@ export class OlapComponent {
 private service = inject(OlapService)
 
 loading: boolean = false
-
+offset: number = 0
+limit: number = 10
 data: Data[] = []
 
 // NAMPUNG DATA CONFIDENCE SEMENTARA
@@ -23,6 +24,12 @@ dataConfidence: any[] = []
 
 // NAMPUNG DATA SATELITE SEMENTARA
 dataSatelite: any[] = []
+
+
+loadMore() {
+  this.offset += this.limit
+  this.getDataLocation("location")
+}
 
 //INSIAL
 
@@ -424,7 +431,11 @@ onFilter(indexes: number[], query?: QueryData, tipe?: Type) {
 
 getDataLocation(target: string) {
   this.loading = true
-  this.service.query(target).subscribe({
+  const params: QueryData = {
+    limit: this.limit,
+    offset: this.offset,
+  }
+  this.service.query(target, params).subscribe({
     next: (res) => {
       var chart: IChart = {
         labels: [],

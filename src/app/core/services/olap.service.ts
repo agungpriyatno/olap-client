@@ -21,14 +21,16 @@ export class OlapService {
   }
 
 
-  private generateParams(query?: QueryData): HttpParams | undefined  {
+  private generateParams(query?: QueryData): HttpParams | undefined {
 
     if (query == undefined) {
       return undefined
     }
-    
+
     const params = new HttpParams()
       .set("point", query?.point ?? "")
+      .append("limit", query?.limit ?? 10)
+      .append("offset", query?.offset ?? 0)
       .append("dimension", query?.dimension ?? "")
       .append("pulau", query?.pulau ?? "")
       .append("provinsi", query?.provinsi ?? "")
